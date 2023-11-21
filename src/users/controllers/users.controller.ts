@@ -14,7 +14,7 @@ import {
 import { UsersService } from '../services/users.service';
 
 // Dtos
-import { CreateUserDto } from '../dtos/users.dtos';
+import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
 
 @Controller('users')
 export class UsersController {
@@ -26,21 +26,24 @@ export class UsersController {
 
   @Get()
   getUsers() {
-    return 'Users!.';
+    return this.usersService.findAllUsers();
   }
 
   @Get(':userId')
   getUserById(@Param('userId', ParseIntPipe) userId: number) {
-    return `User ${userId}`;
+    return this.usersService.findOneUserByUserName(userId);
   }
 
   @Put(':userId')
-  updateUser(@Param('userId') userId: string) {
-    return `Update User ${userId}`;
+  updateUser(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Body() payload: UpdateUserDto,
+  ) {
+    return this.usersService.updateUser(userId, payload);
   }
 
   @Delete(':userId')
-  deleteUser(@Param('userId') userId: string) {
-    return `Delete User ${userId}`;
+  deleteUser(@Param('userId', ParseIntPipe) userId: number) {
+    return this.usersService.deleteUser(userId);
   }
 }
