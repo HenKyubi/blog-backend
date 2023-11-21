@@ -1,10 +1,27 @@
-import { Controller, Post, Get, Param, Put, Delete } from '@nestjs/common';
+// Libs
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  Put,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
+
+// Services
+import { UsersService } from '../services/users.service';
+
+// Dtos
+import { CreateUserDto } from '../dtos/users.dtos';
 
 @Controller('users')
 export class UsersController {
+  constructor(private usersService: UsersService) {}
   @Post()
-  createUser() {
-    return 'User created!.';
+  createUser(@Body() payload: CreateUserDto) {
+    return this.usersService.createUser(payload);
   }
 
   @Get()
@@ -13,7 +30,7 @@ export class UsersController {
   }
 
   @Get(':userId')
-  getUserById(@Param('userId') userId: string) {
+  getUserById(@Param('userId', ParseIntPipe) userId: number) {
     return `User ${userId}`;
   }
 
