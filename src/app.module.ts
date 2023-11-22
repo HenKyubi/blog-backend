@@ -11,6 +11,7 @@ import { environments } from 'src/environments';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
 import { PostsModule } from './posts/posts.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { PostsModule } from './posts/posts.module';
     DatabaseModule,
     UsersModule,
     PostsModule,
+    CommentsModule,
   ],
 })
 export class AppModule {}

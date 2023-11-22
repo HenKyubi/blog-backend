@@ -6,10 +6,12 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
 
 // Entities
-import { User } from '../../users/entities/user.entity';
+import { User } from 'src/users/entities/user.entity';
+import { Comment } from 'src/comments/entities/comment.entity';
 
 @Entity()
 export class Post {
@@ -36,4 +38,9 @@ export class Post {
   // Relations
   @ManyToOne(() => User, (user) => user.posts)
   user: User;
+
+  @OneToMany(() => Comment, (comment) => comment.post, {
+    onDelete: 'CASCADE',
+  })
+  comments: Comment[];
 }
