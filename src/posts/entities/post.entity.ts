@@ -1,36 +1,30 @@
 // Libs
 import {
+  Entity,
   Column,
   CreateDateColumn,
-  Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  OneToMany,
+  ManyToOne,
 } from 'typeorm';
 
 // Entities
-import { Post } from 'src/posts/entities/post.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Entity()
-export class User {
+export class Post {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  firstName: string;
+  title: string;
 
   @Column()
-  lastName: string;
+  description: string;
 
   @Column({
-    unique: true,
+    nullable: true,
   })
-  username: string;
-
-  @Column()
-  password: string;
-
-  @Column({ nullable: true })
   photo?: string;
 
   @CreateDateColumn()
@@ -39,7 +33,7 @@ export class User {
   @UpdateDateColumn()
   updateAt: Date;
 
-  //Relations
-  @OneToMany(() => Post, (post) => post.user)
-  posts: Post[];
+  // Relations
+  @ManyToOne(() => User, (user) => user.posts)
+  user: User;
 }

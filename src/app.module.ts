@@ -10,6 +10,7 @@ import { environments } from 'src/environments';
 // Modules
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { UsersModule } from './users/users.module';
     }),
     DatabaseModule,
     UsersModule,
+    PostsModule,
   ],
 })
 export class AppModule {}

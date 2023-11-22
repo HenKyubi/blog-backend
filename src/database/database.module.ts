@@ -7,8 +7,6 @@ import { dataSourceOptions } from './data-source';
 
 @Global()
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
-  ],
+  imports: [TypeOrmModule.forRoot({ ...dataSourceOptions })],
 })
 export class DatabaseModule {}
