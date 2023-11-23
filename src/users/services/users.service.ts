@@ -8,7 +8,7 @@ import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
 
 // Entities
 import { User } from '../entities/user.entity';
-import { encrypt } from 'utils/bcrypt.handle';
+import { encrypt } from 'src/utils/bcrypt.handle';
 
 @Injectable()
 export class UsersService {
@@ -31,9 +31,17 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  findOneUserById(userId: number) {
-    return this.userRepository.findOneBy({
+  async findOneUserById(userId: number) {
+    return await this.userRepository.findOneBy({
       id: userId,
+    });
+  }
+
+  async findUserByUsername(username: string) {
+    return await this.userRepository.findOne({
+      where: {
+        username,
+      },
     });
   }
 
