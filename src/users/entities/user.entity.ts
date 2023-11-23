@@ -7,10 +7,10 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 // Entities
 import { Post } from 'src/posts/entities/post.entity';
-import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User {

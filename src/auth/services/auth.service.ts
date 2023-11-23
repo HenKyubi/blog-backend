@@ -1,5 +1,6 @@
 // Libs
 import { Injectable } from '@nestjs/common';
+import { instanceToPlain } from 'class-transformer';
 
 // Services
 import { UsersService } from 'src/users/services/users.service';
@@ -14,10 +15,13 @@ export class AuthService {
   async validateUser(phrase: string, password: string) {
     const user = await this.usersService.findUserByUsername(phrase);
 
-    const isMatch = await verifyHash(password, user.password);
+    if (!!user) {
+      const isMatch = await verifyHash(password, user.password);
+      if (isMatch) {
+        const transformedUser = instanceToPlain(user);
 
-    if (!!user && isMatch) {
-      return user;
+        return transformedUser;
+      }
     }
 
     return null;
