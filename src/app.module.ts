@@ -26,6 +26,7 @@ import { CommentsModule } from './comments/comments.module';
         DB_PASSWORD: Joi.string().required(),
         DB_NAME: Joi.string().required(),
         DB_SYNCHRONIZE: Joi.boolean().required(),
+        JWT_SECRET: Joi.string().required(),
       }),
     }),
     DatabaseModule,

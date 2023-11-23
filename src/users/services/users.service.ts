@@ -8,6 +8,7 @@ import { CreateUserDto, UpdateUserDto } from '../dtos/users.dto';
 
 // Entities
 import { User } from '../entities/user.entity';
+import { encrypt } from 'utils/bcrypt.handle';
 
 @Injectable()
 export class UsersService {
@@ -16,9 +17,14 @@ export class UsersService {
     private userRepository: Repository<User>,
   ) {}
 
-  createUser(payload: CreateUserDto) {
+  async createUser(payload: CreateUserDto) {
     const newUser = this.userRepository.create(payload);
-    return this.userRepository.save(newUser);
+
+    const passwordHashed = await encrypt(payload.password);
+
+    newUser.password = passwordHashed;
+
+    return await this.userRepository.save(newUser);
   }
 
   findAllUsers() {

@@ -15,26 +15,27 @@ export class PostsService {
     @InjectRepository(Post)
     private postRepository: Repository<Post>,
   ) {}
-  create(payload: CreatePostDto) {
+
+  async create(payload: CreatePostDto) {
     const newUser = this.postRepository.create(payload);
-    return this.postRepository.save(newUser);
+    return await this.postRepository.save(newUser);
   }
 
-  findAll() {
-    return this.postRepository.find();
+  async findAll() {
+    return await this.postRepository.find();
   }
 
-  findOne(id: number) {
-    return this.postRepository.findOneBy({
+  async findOne(id: number) {
+    return await this.postRepository.findOneBy({
       id,
     });
   }
 
-  update(id: number, payload: UpdatePostDto) {
-    return this.postRepository.update({ id }, payload);
+  async update(id: number, payload: UpdatePostDto) {
+    return await this.postRepository.update({ id }, payload);
   }
 
-  remove(id: number) {
-    return this.postRepository.delete({ id });
+  async remove(id: number) {
+    return await this.postRepository.delete({ id });
   }
 }
