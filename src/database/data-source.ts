@@ -1,7 +1,17 @@
 // Libs
 import * as dotenv from 'dotenv';
 import { DataSource, DataSourceOptions } from 'typeorm';
+
+// Utils
 import { environments } from 'src/environments';
+import {
+  DB_HOST,
+  DB_PORT,
+  DB_USERNAME,
+  DB_PASSWORD,
+  DB_NAME,
+  DB_SYNCHRONIZE,
+} from '../constants';
 
 // Entities
 import { User } from 'src/users/entities/user.entity';
@@ -12,12 +22,12 @@ dotenv.config({ path: environments[process.env.NODE_ENV] || '.env' });
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'mysql',
-  host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  synchronize: !!process.env.DB_SYNCHRONIZE,
+  host: DB_HOST,
+  port: DB_PORT,
+  username: DB_USERNAME,
+  password: DB_PASSWORD,
+  database: DB_NAME,
+  synchronize: DB_SYNCHRONIZE,
   entities: [User, Post, Comment],
   logging: true,
   migrations: ['src/database/migrations/*.ts'],
