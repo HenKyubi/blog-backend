@@ -2,8 +2,8 @@
 import { JwtPayload } from 'jsonwebtoken';
 import { Role } from '../types/enums.type';
 
-export interface JWTMock extends JwtPayload {
-  userId: number;
+export interface PayloadToken extends JwtPayload {
+  role: Role;
+  sub: number;
   username: string;
-  role?: Role;
 }

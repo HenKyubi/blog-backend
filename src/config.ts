@@ -10,5 +10,6 @@ export default registerAs('config', () => {
       database: process.env.DB_DATABASE,
       synchronize: !!process.env.DB_SYNCHRONIZE,
     },
+    jwtSecret: process.env.JWT_SECRET,
   };
 });

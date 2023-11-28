@@ -2,12 +2,12 @@
 import { sign, verify } from 'jsonwebtoken';
 
 // Types
-import { JWTMock } from '../interfaces/jwt.interface';
+import { PayloadToken } from '../interfaces/jwt.interface';
 
 // Configs
 const JWT_SECRET = process.env.JWT_SECRET;
 
-export const generateToken = (userData: JWTMock) => {
+export const generateToken = (userData: PayloadToken) => {
   const jwt = sign(userData, JWT_SECRET, {
     expiresIn: '4h',
   });
@@ -15,6 +15,6 @@ export const generateToken = (userData: JWTMock) => {
 };
 
 export const verifyToken = (jwt: string) => {
-  const tokenData: JWTMock = verify(jwt, JWT_SECRET) as JWTMock;
+  const tokenData: PayloadToken = verify(jwt, JWT_SECRET) as PayloadToken;
   return tokenData;
 };
